@@ -178,7 +178,7 @@ describe('RegistrationForm', () => {
       lastName: existingUser.lastName,
       zipcode: existingUser.zipcode,
     }).reply(400, {
-      email: ['has been taken'],
+      email: ['Email has been taken.'],
     });
 
     const successSpy = jest.fn();
