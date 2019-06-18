@@ -1,6 +1,6 @@
 .actionItems {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   width: 100%;
   margin: auto;
@@ -9,4 +9,12 @@
 
 .actionItems > a {
   margin: 1rem;
+}
+
+.profileButton {
+  width: 300px;
+}
+
+.centerText {
+  text-align: center;
 }

@@ -25,6 +25,9 @@ export const loginUser = ({ email, password }) =>
 export const loginSocial = (provider, body) =>
   post(`auth/social/${provider}/`, body).then(({ data }) => data);
 
+export const connectSocial = (provider, body) =>
+  post(`auth/social/${provider}/connect/`, body).then(({ data }) => data);
+
 export const passwordReset = ({ email }) =>
   post('auth/password/reset/', { email }).then(({ data }) => data);
 
