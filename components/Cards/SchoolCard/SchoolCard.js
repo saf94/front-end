@@ -3,9 +3,9 @@ import { arrayOf, bool, func, string, shape } from 'prop-types';
 import classNames from 'classnames';
 import Card from 'components/Cards/Card/Card';
 import OnlineIcon from 'static/images/icons/Custom/online.svg';
-import CampusIcon from 'static/images/icons/Custom/campus.svg';
 import HousingIcon from 'static/images/icons/Custom/housing.svg';
 import EquipmentIcon from 'static/images/icons/Custom/equipment.svg';
+import MapMarkerIcon from 'static/images/icons/FontAwesome/map_marker_icon.svg';
 import LinkButton from 'components/LinkButton/LinkButton';
 import Button from 'components/Button/Button';
 import Badge from 'components/Badge/Badge';
@@ -65,6 +65,13 @@ export default class SchoolCard extends Component {
     const { props } = this;
 
     const hasGiBill = props.locations.some(location => location.vaAccepted);
+    const hasManyLocations = props.locations.length > 1;
+
+    // Only leveraged if !hasManyLocations
+    const simpleLocationText = props.hasOnlyOnline
+      ? 'School is remote. No physical campus exists!'
+      : `Campus located in ${props.locations[0].city}, ${props.locations[0].state}`;
+
     const badgeClassNames = isActive =>
       classNames(styles.badgeGroupItem, { [styles.active]: isActive });
 
@@ -76,20 +83,24 @@ export default class SchoolCard extends Component {
         </ScreenReaderOnly>
 
         {hasGiBill && (
-          <div className={styles.giBillRibbon} data-testid="GI Bill Ribbon">
-            GI Bill
-          </div>
+          <section className={styles.giBillRibbon} data-testid="GI Bill Ribbon">
+            <ScreenReaderOnly>Accepts</ScreenReaderOnly> GI Bill
+          </section>
         )}
 
-        <div className={styles.cardBrand}>
+        <section className={styles.cardBrand}>
           <img src={props.logoSource} alt={`${props.name} logo`} height="150" />
-        </div>
+        </section>
 
-        <div className={styles.cardBlock}>
-          <span className={styles.cardBlockTitle}>Availability</span>
+        <section className={styles.cardBlock}>
           <div className={styles.badgeGroup}>
             <Badge
-              label={<LabelWithScreenReader label="Online" isActive={props.hasOnline} />}
+              label={
+                <LabelWithScreenReader
+                  label={props.hasOnline ? 'Remote Option' : 'No Remote'}
+                  isActive={props.hasOnline}
+                />
+              }
               icon={
                 <OnlineIcon
                   data-testid={props.hasOnline ? 'School has online' : 'School has no online'}
@@ -97,50 +108,57 @@ export default class SchoolCard extends Component {
               }
               className={badgeClassNames(props.hasOnline)}
             />
+
             <Badge
-              label={<LabelWithScreenReader label="Campus" isActive={!props.hasOnlyOnline} />}
-              icon={<CampusIcon />}
-              className={badgeClassNames(!props.hasOnlyOnline)}
-            />
-            <Badge
-              label={<LabelWithScreenReader label="Housing" isActive={props.hasHousing} />}
+              label={
+                <LabelWithScreenReader
+                  label={props.hasHousing ? 'Housing Provided' : 'No Housing'}
+                  isActive={props.hasHousing}
+                />
+              }
               icon={<HousingIcon />}
               className={badgeClassNames(props.hasHousing)}
             />
             <Badge
               label={
-                <LabelWithScreenReader label="Equipment" isActive={props.hasHardwareIncluded} />
+                <LabelWithScreenReader
+                  label={props.hasHardwareIncluded ? 'Hardware Provided' : 'No Hardware'}
+                  isActive={props.hasHardwareIncluded}
+                />
               }
               icon={<EquipmentIcon />}
               className={badgeClassNames(props.hasHardwareIncluded)}
             />
           </div>
-        </div>
+        </section>
 
-        <div className={styles.cardBlock}>
-          <span className={styles.cardBlockTitle}>Accepts GI Bill</span>
-          {hasGiBill ? 'Yes' : 'No'}
-        </div>
-
-        <div className={styles.cardBlock}>
-          <span className={styles.cardBlockTitle}>Campus Locations</span>
-          {getSchoolLocationText(props.hasOnlyOnline, props.locations)}
-          {props.locations.length > 1 && (
-            <Button
-              analyticsObject={{
-                action: 'Button Selected',
-                category: 'Interactions',
-                label: `${props.name} | Locations`,
-              }}
-              onClick={this.toggleModalClick}
-              className={styles.modalToggler}
-            >
-              view all
-            </Button>
+        <section className={styles.cardBlock}>
+          {hasManyLocations ? (
+            <>
+              <span>
+                <MapMarkerIcon className={styles.mapMarkerIcon} />
+                Many campuses...{' '}
+              </span>
+              <Button
+                analyticsObject={{
+                  action: 'Button Selected',
+                  category: 'Interactions',
+                  label: `${props.name} | Locations`,
+                }}
+                onClick={this.toggleModalClick}
+                className={styles.modalToggler}
+              >
+                Show Locations
+              </Button>
+            </>
+          ) : (
+            <span>
+              <MapMarkerIcon className={styles.mapMarkerIcon} /> {simpleLocationText}
+            </span>
           )}
-        </div>
+        </section>
 
-        <div className={styles.cardBlock}>
+        <section className={styles.cardBlock}>
           <LinkButton
             analyticsEventLabel={`${props.name} | Website`}
             href={props.website}
@@ -149,7 +167,7 @@ export default class SchoolCard extends Component {
           >
             Visit Website
           </LinkButton>
-        </div>
+        </section>
       </Card>
     );
   }

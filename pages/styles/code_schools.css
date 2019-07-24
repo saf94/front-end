@@ -32,6 +32,12 @@
   justify-content: center;
 }
 
+@media screen and (--small-viewport) {
+  .schoolCardsWrapper {
+    margin: 0;
+  }
+}
+
 .centered {
   margin: 1rem 0;
   text-align: center;

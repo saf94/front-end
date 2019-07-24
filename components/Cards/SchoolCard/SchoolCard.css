@@ -19,6 +19,8 @@
 
 @media screen and (--small-viewport) {
   .SchoolCard {
+    margin: 1rem 0;
+    max-width: 300px;
     width: 100%;
   }
 }
@@ -77,24 +79,16 @@
 
 .cardBlock {
   display: flex;
+  justify-content: space-between;
   width: 100%;
-  padding: 1rem 0.75rem;
+  padding: 1.25rem 0.75rem;
   border-top: 1px solid var(--gray);
-}
-
-.cardBlockTitle {
-  font-weight: bold;
-  display: block;
-  margin-right: auto;
-  padding-right: 6px;
-  color: var(--secondary);
 }
 
 .SchoolCard .modalToggler {
   min-width: auto;
   text-transform: none;
-  padding: 2px 6px 0;
-  margin: -4px 0 0 7px;
+  padding: 3px 6px 0;
   letter-spacing: 0;
   color: inherit;
   background-color: var(--gray);
@@ -107,15 +101,13 @@
   border-color: var(--gray);
 }
 
-@media screen and (--large-viewport) {
-  .SchoolCard .modalToggler {
-    margin-top: -5px;
-  }
-}
-
 .badgeGroup {
   display: flex;
+  justify-content: space-between;
   color: var(--gray);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .badgeGroupItem {
@@ -150,18 +142,18 @@
   }
 }
 
-@media screen and (--small-viewport) {
-  .badgeGroupItem svg {
-    height: 22px;
-  }
-}
-
 .badgeGroupItem figcaption {
   margin-top: 10px;
 }
 
 @media screen and (--small-viewport) {
   .badgeGroupItem figcaption {
-    font-size: 0.875em;
+    font-size: 1rem;
   }
+}
+
+.mapMarkerIcon {
+  width: 15px;
+  vertical-align: sub;
+  margin-right: 0.325rem;
 }

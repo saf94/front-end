@@ -41,7 +41,120 @@ const moocSchools = [
 export default class CodeSchools extends React.Component {
   static async getInitialProps() {
     try {
-      const { data } = await getCodeSchoolsPromise();
+      // const { data } = await getCodeSchoolsPromise();
+
+      const data = [
+        {
+          name: 'Boot Camp 1',
+          hardwareIncluded: false,
+          hasHousing: true,
+          hasOnline: false,
+          onlineOnly: false,
+          fullTime: true,
+          logo: udacity,
+          url: 'https://bootcamp.com',
+          locations: [
+            {
+              city: 'Bellflower',
+              state: 'CA',
+              vaAccepted: true,
+            },
+          ],
+        },
+        {
+          name: 'Boot Camp 2',
+          hardwareIncluded: false,
+          hasHousing: false,
+          hasOnline: false,
+          onlineOnly: false,
+          fullTime: true,
+          logo: udacity,
+          url: 'https://bootcamp.com',
+          locations: [
+            {
+              city: 'Irvine',
+              state: 'CA',
+              vaAccepted: true,
+            },
+          ],
+        },
+        {
+          name: 'Boot Camp 3',
+          hardwareIncluded: true,
+          hasHousing: false,
+          hasOnline: true,
+          onlineOnly: false,
+          fullTime: false,
+          logo: udacity,
+          url: 'https://bootcamp.com',
+          locations: [
+            {
+              city: 'San Francisco',
+              state: 'CA',
+              vaAccepted: false,
+            },
+            {
+              city: 'Seattle',
+              state: 'WA',
+              vaAccepted: false,
+            },
+            {
+              city: 'Austin',
+              state: 'TX',
+              vaAccepted: false,
+            },
+            {
+              city: 'New York',
+              state: 'NY',
+              vaAccepted: false,
+            },
+          ],
+        },
+        {
+          name: 'Boot Camp 4',
+          hardwareIncluded: false,
+          hasHousing: false,
+          hasOnline: false,
+          onlineOnly: false,
+          fullTime: true,
+          logo: udacity,
+          url: 'https://bootcamp.com',
+          locations: [
+            {
+              city: 'New York',
+              state: 'NY',
+              vaAccepted: true,
+            },
+            {
+              city: 'Miami',
+              state: 'FL',
+              vaAccepted: false,
+            },
+            {
+              city: 'Dallas',
+              state: 'TX',
+              vaAccepted: true,
+            },
+          ],
+        },
+        {
+          name: 'Boot Camp 5',
+          hardwareIncluded: false,
+          hasHousing: false,
+          hasOnline: false,
+          onlineOnly: false,
+          fullTime: true,
+          logo: udacity,
+          url: 'https://bootcamp.com',
+          locations: [
+            {
+              city: 'San Diego',
+              state: 'CA',
+              vaAccepted: true,
+            },
+          ],
+        },
+      ];
 
       return {
         allSchools: data,
