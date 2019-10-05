@@ -7,6 +7,16 @@
   display: flex;
 }
 
+.filters {
+  display: flex;
+  justify-content: center;
+}
+
+.filterItem {
+  font-size: 24px;
+  cursor: pointer;
+}
+
 /* Date (left column) */
 .date {
   flex: 1;
